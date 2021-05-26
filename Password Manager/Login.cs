@@ -37,7 +37,33 @@ namespace Password_Manager
 
             try
             {
-                
+                //JEIGU EGZISTUOJA AES FAILAS SU TOKIU USERNAME TADA ..
+                if (File.Exists(path + ".aes"))
+                {
+                    //SUSIKURIAME ASE OBJEKTA HAD DEKRYPTINT FAILA
+                    AES sE = new AES();
+                    //Thread th = new Thread(() => sE.FileDecrypt(path + ".aes", path, keyy));
+                    //th.Start();
+
+                    //DECRYPTINAM SU TOKIU PACIU RAKTU
+                    sE.FileDecrypt(path + ".aes", path, keyy);
+                }
+                else
+                {
+                    //JEIGU NERA SUKURIAME TOKI FAILA
+                    FileStream fs = File.Create(path);
+                    fs.Close();
+                }
+
+                //Thread th1 = new Thread(() => ql.login(LoginUsername.Text, sh.passHash(loginPassword.Text)));
+                //th1.Start();
+
+                //PANAUDOJAME SQL FUNCKIJA LOGIN KURIA SUKUREME, DUODAME USERNAME, UZHASHINTA PASSWORD. FUNCKIJA PAZIURES AR PASSWORDAI SUTAMPA
+                ql.login(LoginUsername.Text, sh.passHash(loginPassword.Text));
+
+                //ATIDAROME HOME SCREEN
+                Home home = new Home();
+                home.ShowDialog();
 
             }
             catch (Exception exc)
