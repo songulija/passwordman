@@ -35,9 +35,19 @@ namespace Password_Manager
             sql ql = new sql();
             try
             {
-               
-                
-                
+
+                if (Password.Text == ConfiemPassword.Text)
+                {
+                    //Thread th1 = new Thread(() => ql.AddUser(Username.Text, sh.passHash(Password.Text)));
+                    //th1.Start();
+                    //ISSIKVIECIAME SQL klases funkijc AddUser. duadame username, uzhasinta passworda ir viskas
+                    ql.AddUser(Username.Text, sh.passHash(Password.Text));
+                }
+                else
+                {
+                    MessageBox.Show("PASSWORD DOESNT MATCH");
+                }
+
             }
             catch (Exception exc)
             {
